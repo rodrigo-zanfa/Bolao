@@ -1,0 +1,38 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:61011",
+      "sslPort": 44392
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development" //,
+        //"DB_DATA_SOURCE": "localhost",
+        //"DB_INITIAL_CATALOG": "Bolao",
+        //"DB_USER_ID": "sa",
+        //"DB_PASSWORD": "q1w2e3r4t5",
+        //"JWT_ISSUER": "SIGE",
+        //"JWT_AUDIENCE": "SigeAPI",
+        //"JWT_KEY": "D7B3BA2D-18BE-4B89-B517-58275CCCA3E6"
+      }
+    },
+    "Bolao.API": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
