@@ -1,5 +1,5 @@
 ﻿using Bolao.Domain.Commands.Propostas;
-using Bolao.Domain.Enums.Pagamentos;
+using Bolao.Domain.Enums.Propostas;
 using Bolao.Service.Constants;
 using FluentValidation;
 using System;

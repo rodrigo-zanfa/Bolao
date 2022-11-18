@@ -1,7 +1,7 @@
 ﻿using Core.Commands;
 using Bolao.Domain.Commands.Propostas;
 using Bolao.Domain.Entities.Propostas;
-using Bolao.Domain.Enums.Pagamentos;
+using Bolao.Domain.Enums.Propostas;
 using Bolao.Infrastructure.Interfaces.Repositories.Produtos;
 using Bolao.Infrastructure.Interfaces.Repositories.Propostas;
 using Bolao.Service.Helpers;
