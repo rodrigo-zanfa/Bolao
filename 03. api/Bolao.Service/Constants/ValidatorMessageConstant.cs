@@ -172,5 +172,15 @@
             public const string PlacarTime1Invalido = "Placar do Time 1 deve ser preenchido.";
             public const string PlacarTime2Invalido = "Placar do Time 2 deve ser preenchido.";
         }
+
+        public static class Usuario
+        {
+            public const string NomeInvalido = "Nome do Usuário deve ser preenchido.";
+            public const string EmailInvalido = "E-mail do Usuário deve ser preenchido.";
+            public const string SenhaInvalida = "Senha do Usuário deve ser preenchida.";
+            public const string SenhaConfirmacaoInvalida = "Confirmação da Senha do Usuário deve ser preenchida.";
+            public const string SenhasNaoConferem = "As Senhas informadas não conferem.";
+            public const string UrlImagemInvalida = "URL da imagem do Usuário deve ser preenchida.";
+        }
     }
 }

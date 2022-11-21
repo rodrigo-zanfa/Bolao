@@ -102,7 +102,7 @@ CREATE TABLE [Usuario] (
     [IdUsuario] int NOT NULL IDENTITY,
     [Nome] varchar(100) NOT NULL,
     [Email] varchar(100) NOT NULL,
-    [Senha] varchar(60) NOT NULL,
+    [Senha] varchar(100) NOT NULL,
     [UrlImagem] varchar(255) NOT NULL,
     [DtCadastro] datetime NOT NULL,
     CONSTRAINT [PK_Usuario] PRIMARY KEY ([IdUsuario])

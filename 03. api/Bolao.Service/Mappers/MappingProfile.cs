@@ -3,6 +3,7 @@ using Bolao.Service.Mappers.Campeonatos;
 using Bolao.Service.Mappers.ClassesParceiros;
 using Bolao.Service.Mappers.Produtos;
 using Bolao.Service.Mappers.TabelasConfiguracoes;
+using Bolao.Service.Mappers.Usuarios;
 
 namespace Bolao.Service.Mappers
 {
@@ -14,7 +15,8 @@ namespace Bolao.Service.Mappers
                 .AddMappersProdutos()
                 .AddMappersClassesParceiros()
                 .AddMappersTabelasConfiguracoes()
-                .AddMappersCampeonatos();
+                .AddMappersCampeonatos()
+                .AddMappersUsuarios();
         }
     }
 }

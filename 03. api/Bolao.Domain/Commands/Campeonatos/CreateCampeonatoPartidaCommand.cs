@@ -13,7 +13,7 @@ namespace Bolao.Domain.Commands.Campeonatos
         public int IdEstadio { get; set; }
         public int IdCampeonatoTime1 { get; set; }
         public int IdCampeonatoTime2 { get; set; }
-        public int? PlacarTime1 { get; set; }
-        public int? PlacarTime2 { get; set; }
+        //public int? PlacarTime1 { get; set; }
+        //public int? PlacarTime2 { get; set; }
     }
 }

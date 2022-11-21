@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Bolao.Service\Bolao.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Campeonatos\" />
+  </ItemGroup>
+
 </Project>

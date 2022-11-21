@@ -41,7 +41,7 @@ select
   t.UrlImagem
 from Time t
 where t.IdTimeAux = @IdTimeAux
-order by t.IdTimeAux
+order by t.IdTime
 ";
 
             var result = await connection.QueryFirstOrDefaultAsync<Time>(sql, new

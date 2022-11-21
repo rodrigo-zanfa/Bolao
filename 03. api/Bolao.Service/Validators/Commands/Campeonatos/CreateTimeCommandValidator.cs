@@ -27,8 +27,7 @@ namespace Bolao.Service.Validators.Commands.Campeonatos
             RuleFor(c => c.UrlImagem)
                 .NotEmpty().WithMessage(ValidatorMessageConstant.Time.UrlImagemInvalida)
                 .Length(1, 255).WithMessage(ValidatorMessageConstant.Time.UrlImagemInvalida)
-                //.Must(uri => Uri.IsWellFormedUriString(uri.UrlImagem, UriKind.RelativeOrAbsolute)).WithMessage(ValidatorMessageConstant.Produto.CodigoInvalido);
-                .Must(uri => Uri.TryCreate(uri, UriKind.Absolute, out _)).When(c1 => !string.IsNullOrEmpty(c1.UrlImagem)).WithMessage(ValidatorMessageConstant.Produto.CodigoInvalido);
+                .Must(c1 => c1.IsValidUrl()).WithMessage(ValidatorMessageConstant.Time.UrlImagemInvalida);
         }
     }
 }
