@@ -182,5 +182,13 @@
             public const string SenhasNaoConferem = "As Senhas informadas não conferem.";
             public const string UrlImagemInvalida = "URL da imagem do Usuário deve ser preenchida.";
         }
+
+        public static class BolaoPalpite
+        {
+            public const string IdBolaoUsuarioInvalido = "Id do Bolão Usuário deve ser preenchido.";
+            public const string IdCampeonatoPartidaInvalido = "Id do Campeonato Partida deve ser preenchido.";
+            public const string PlacarTime1Invalido = "Placar do Time 1 deve ser preenchido.";
+            public const string PlacarTime2Invalido = "Placar do Time 2 deve ser preenchido.";
+        }
     }
 }

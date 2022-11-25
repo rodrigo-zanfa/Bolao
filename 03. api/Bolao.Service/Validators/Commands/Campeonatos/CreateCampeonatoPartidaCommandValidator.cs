@@ -28,10 +28,10 @@ namespace Bolao.Service.Validators.Commands.Campeonatos
             //When(c => (c.PlacarTime1 is not null || c.PlacarTime2 is not null), () =>
             //{
             //    RuleFor(c => c.PlacarTime1)
-            //        .GreaterThan(0).WithMessage(ValidatorMessageConstant.CampeonatoPartida.PlacarTime1Invalido);
+            //        .GreaterThanOrEqualTo(0).WithMessage(ValidatorMessageConstant.CampeonatoPartida.PlacarTime1Invalido);
 
             //    RuleFor(c => c.PlacarTime2)
-            //        .GreaterThan(0).WithMessage(ValidatorMessageConstant.CampeonatoPartida.PlacarTime2Invalido);
+            //        .GreaterThanOrEqualTo(0).WithMessage(ValidatorMessageConstant.CampeonatoPartida.PlacarTime2Invalido);
             //});
         }
     }

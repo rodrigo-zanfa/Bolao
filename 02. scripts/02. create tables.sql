@@ -133,6 +133,7 @@ GO
 CREATE TABLE [Regra] (
     [IdRegra] int NOT NULL IDENTITY,
     [Descricao] varchar(100) NOT NULL,
+    [DescricaoDetalhada] varchar(300) NOT NULL,
     [Pontuacao] int NOT NULL,
     [Ordem] int NOT NULL,
     [Status] varchar(1) NOT NULL,
@@ -180,7 +181,7 @@ CREATE TABLE [BolaoPalpite] (
     [PlacarTime1] int NOT NULL,
     [PlacarTime2] int NOT NULL,
     [DtCadastro] datetime NOT NULL,
-    [DtAlteracao] datetime NOT NULL,
+    [DtAlteracao] datetime NULL,
     [DtPontuacao] datetime NULL,
     [IdRegra] int NULL,
     [Pontuacao] int NULL,

@@ -1,6 +1,5 @@
 ﻿using Core.Commands;
 using Bolao.Domain.Commands.Propostas;
-using Bolao.Domain.Entities.Propostas;
 using System;
 using System.Collections.Generic;
 using System.Linq;

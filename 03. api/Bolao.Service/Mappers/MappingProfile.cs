@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Bolao.Service.Mappers.Boloes;
 using Bolao.Service.Mappers.Campeonatos;
 using Bolao.Service.Mappers.ClassesParceiros;
 using Bolao.Service.Mappers.Produtos;
@@ -16,7 +17,8 @@ namespace Bolao.Service.Mappers
                 .AddMappersClassesParceiros()
                 .AddMappersTabelasConfiguracoes()
                 .AddMappersCampeonatos()
-                .AddMappersUsuarios();
+                .AddMappersUsuarios()
+                .AddMappersBoloes();
         }
     }
 }

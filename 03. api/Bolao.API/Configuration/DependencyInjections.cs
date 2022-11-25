@@ -1,4 +1,5 @@
-﻿using Bolao.Domain.Commands.Campeonatos;
+﻿using Bolao.Domain.Commands.Boloes;
+using Bolao.Domain.Commands.Campeonatos;
 using Bolao.Domain.Commands.ClassesParceiros;
 using Bolao.Domain.Commands.Produtos;
 using Bolao.Domain.Commands.Propostas;
@@ -6,6 +7,7 @@ using Bolao.Domain.Commands.TabelasConfiguracoes;
 using Bolao.Domain.Commands.Usuarios;
 using Bolao.Domain.Configs;
 using Bolao.Domain.Interfaces.Configs;
+using Bolao.Infrastructure.Interfaces.Repositories.Boloes;
 using Bolao.Infrastructure.Interfaces.Repositories.Campeonatos;
 using Bolao.Infrastructure.Interfaces.Repositories.ClassesParceiros;
 using Bolao.Infrastructure.Interfaces.Repositories.MarcasEstruturas;
@@ -14,6 +16,7 @@ using Bolao.Infrastructure.Interfaces.Repositories.Propostas;
 using Bolao.Infrastructure.Interfaces.Repositories.TabelasConfiguracoes;
 using Bolao.Infrastructure.Interfaces.Repositories.TiposFixacoes;
 using Bolao.Infrastructure.Interfaces.Repositories.Usuarios;
+using Bolao.Infrastructure.Repositories.Boloes;
 using Bolao.Infrastructure.Repositories.Campeonatos;
 using Bolao.Infrastructure.Repositories.ClassesParceiros;
 using Bolao.Infrastructure.Repositories.MarcasEstruturas;
@@ -22,6 +25,7 @@ using Bolao.Infrastructure.Repositories.Propostas;
 using Bolao.Infrastructure.Repositories.TabelasConfiguracoes;
 using Bolao.Infrastructure.Repositories.TiposFixacoes;
 using Bolao.Infrastructure.Repositories.Usuarios;
+using Bolao.Service.Interfaces.Services.Boloes;
 using Bolao.Service.Interfaces.Services.Campeonatos;
 using Bolao.Service.Interfaces.Services.ClassesParceiros;
 using Bolao.Service.Interfaces.Services.Importacoes;
@@ -31,6 +35,7 @@ using Bolao.Service.Interfaces.Services.Propostas;
 using Bolao.Service.Interfaces.Services.TabelasConfiguracoes;
 using Bolao.Service.Interfaces.Services.TiposFixacoes;
 using Bolao.Service.Interfaces.Services.Usuarios;
+using Bolao.Service.Services.Boloes;
 using Bolao.Service.Services.Campeonatos;
 using Bolao.Service.Services.ClassesParceiros;
 using Bolao.Service.Services.Importacoes;
@@ -40,6 +45,7 @@ using Bolao.Service.Services.Propostas;
 using Bolao.Service.Services.TabelasConfiguracoes;
 using Bolao.Service.Services.TiposFixacoes;
 using Bolao.Service.Services.Usuarios;
+using Bolao.Service.Validators.Commands.Boloes;
 using Bolao.Service.Validators.Commands.Campeonatos;
 using Bolao.Service.Validators.Commands.ClassesParceiros;
 using Bolao.Service.Validators.Commands.Produtos;
@@ -65,6 +71,7 @@ namespace Bolao.API.Configuration
                 .AddClassesParceirosInjection()
                 .AddCampeonatosInjection()
                 .AddUsuariosInjection()
+                .AddBoloesInjection()
                 .AddImportacoesInjection();
         }
 
@@ -213,6 +220,16 @@ namespace Bolao.API.Configuration
                 .AddTransient<IUsuarioRepository, UsuarioRepository>()
                 .AddTransient<IUsuarioService, UsuarioService>()
                 .AddTransient<IValidator<CreateUsuarioCommand>, CreateUsuarioCommandValidator>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddBoloesInjection(this IServiceCollection services)
+        {
+            services
+                .AddTransient<IBolaoPalpiteRepository, BolaoPalpiteRepository>()
+                .AddTransient<IBolaoPalpiteService, BolaoPalpiteService>()
+                .AddTransient<IValidator<CreateBolaoPalpiteCommand>, CreateBolaoPalpiteCommandValidator>();
 
             return services;
         }
