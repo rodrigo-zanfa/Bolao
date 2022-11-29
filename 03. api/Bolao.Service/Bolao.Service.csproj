@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Bolao.Infrastructure\Bolao.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\Services\Importacoes\APIs\" />
+  </ItemGroup>
+
 </Project>

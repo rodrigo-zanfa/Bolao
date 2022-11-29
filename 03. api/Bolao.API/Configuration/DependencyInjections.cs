@@ -13,6 +13,7 @@ using Bolao.Infrastructure.Interfaces.Repositories.ClassesParceiros;
 using Bolao.Infrastructure.Interfaces.Repositories.MarcasEstruturas;
 using Bolao.Infrastructure.Interfaces.Repositories.Produtos;
 using Bolao.Infrastructure.Interfaces.Repositories.Propostas;
+using Bolao.Infrastructure.Interfaces.Repositories.Regras;
 using Bolao.Infrastructure.Interfaces.Repositories.TabelasConfiguracoes;
 using Bolao.Infrastructure.Interfaces.Repositories.TiposFixacoes;
 using Bolao.Infrastructure.Interfaces.Repositories.Usuarios;
@@ -22,6 +23,7 @@ using Bolao.Infrastructure.Repositories.ClassesParceiros;
 using Bolao.Infrastructure.Repositories.MarcasEstruturas;
 using Bolao.Infrastructure.Repositories.Produtos;
 using Bolao.Infrastructure.Repositories.Propostas;
+using Bolao.Infrastructure.Repositories.Regras;
 using Bolao.Infrastructure.Repositories.TabelasConfiguracoes;
 using Bolao.Infrastructure.Repositories.TiposFixacoes;
 using Bolao.Infrastructure.Repositories.Usuarios;
@@ -30,8 +32,10 @@ using Bolao.Service.Interfaces.Services.Campeonatos;
 using Bolao.Service.Interfaces.Services.ClassesParceiros;
 using Bolao.Service.Interfaces.Services.Importacoes;
 using Bolao.Service.Interfaces.Services.MarcasEstruturas;
+using Bolao.Service.Interfaces.Services.Pontuacoes;
 using Bolao.Service.Interfaces.Services.Produtos;
 using Bolao.Service.Interfaces.Services.Propostas;
+using Bolao.Service.Interfaces.Services.Regras;
 using Bolao.Service.Interfaces.Services.TabelasConfiguracoes;
 using Bolao.Service.Interfaces.Services.TiposFixacoes;
 using Bolao.Service.Interfaces.Services.Usuarios;
@@ -40,8 +44,10 @@ using Bolao.Service.Services.Campeonatos;
 using Bolao.Service.Services.ClassesParceiros;
 using Bolao.Service.Services.Importacoes;
 using Bolao.Service.Services.MarcasEstruturas;
+using Bolao.Service.Services.Pontuacoes;
 using Bolao.Service.Services.Produtos;
 using Bolao.Service.Services.Propostas;
+using Bolao.Service.Services.Regras;
 using Bolao.Service.Services.TabelasConfiguracoes;
 using Bolao.Service.Services.TiposFixacoes;
 using Bolao.Service.Services.Usuarios;
@@ -72,7 +78,9 @@ namespace Bolao.API.Configuration
                 .AddCampeonatosInjection()
                 .AddUsuariosInjection()
                 .AddBoloesInjection()
-                .AddImportacoesInjection();
+                .AddRegrasInjection()
+                .AddImportacoesInjection()
+                .AddPontuacoesInjection();
         }
 
         private static IServiceCollection AddApiSettingsAccessorInjection(this IServiceCollection services)
@@ -209,7 +217,8 @@ namespace Bolao.API.Configuration
             services
                 .AddTransient<ICampeonatoPartidaRepository, CampeonatoPartidaRepository>()
                 .AddTransient<ICampeonatoPartidaService, CampeonatoPartidaService>()
-                .AddTransient<IValidator<CreateCampeonatoPartidaCommand>, CreateCampeonatoPartidaCommandValidator>();
+                .AddTransient<IValidator<CreateCampeonatoPartidaCommand>, CreateCampeonatoPartidaCommandValidator>()
+                .AddTransient<IValidator<UpdatePlacarCampeonatoPartidaCommand>, UpdatePlacarCampeonatoPartidaCommandValidator>();
 
             return services;
         }
@@ -234,11 +243,30 @@ namespace Bolao.API.Configuration
             return services;
         }
 
+        private static IServiceCollection AddRegrasInjection(this IServiceCollection services)
+        {
+            services
+                .AddTransient<IRegraRepository, RegraRepository>()
+                .AddTransient<IRegraService, RegraService>()
+                /*.AddTransient<IValidator<CreateRegraCommand>, CreateRegraCommandValidator>()*/;
+
+            return services;
+        }
+
         private static IServiceCollection AddImportacoesInjection(this IServiceCollection services)
         {
             services
                 /*.AddTransient<IImportacaoRepository, ImportacaoRepository>()*/
                 .AddTransient<IImportacaoService, ImportacaoService>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddPontuacoesInjection(this IServiceCollection services)
+        {
+            services
+                /*.AddTransient<IPontuacaoRepository, PontuacaoRepository>()*/
+                .AddTransient<IPontuacaoService, PontuacaoService>();
 
             return services;
         }

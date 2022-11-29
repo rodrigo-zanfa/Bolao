@@ -165,10 +165,12 @@
 
         public static class CampeonatoPartida
         {
+            public const string IdCampeonatoPartidaInvalido = "Id da Partida do Campeonato deve ser preenchido.";
             public const string DtPartidaInvalida = "Data da Partida deve ser maior ou igual à data atual.";
             public const string IdEstadioInvalido = "Id do Estádio deve ser preenchido.";
             public const string IdCampeonatoTime1Invalido = "Id do Campeonato/Time 1 deve ser preenchido.";
             public const string IdCampeonatoTime2Invalido = "Id do Campeonato/Time 2 deve ser preenchido.";
+            public const string PesoInvalido = "Peso da Partida deve ser preenchido.";
             public const string PlacarTime1Invalido = "Placar do Time 1 deve ser preenchido.";
             public const string PlacarTime2Invalido = "Placar do Time 2 deve ser preenchido.";
         }

@@ -23,9 +23,30 @@ namespace Bolao.Infrastructure.Repositories.Campeonatos
             throw new NotImplementedException();
         }
 
-        public Task<CampeonatoPartida> GetByIdAsync(int id)
+        public async Task<CampeonatoPartida> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  cp.IdCampeonatoPartida,
+  cp.DtPartida,
+  cp.IdEstadio,
+  cp.IdCampeonatoTime1,
+  cp.IdCampeonatoTime2,
+  cp.Peso,
+  cp.PlacarTime1,
+  cp.PlacarTime2
+from CampeonatoPartida cp
+where cp.IdCampeonatoPartida = @IdCampeonatoPartida
+";
+
+            var result = await connection.QueryFirstOrDefaultAsync<CampeonatoPartida>(sql, new
+            {
+                IdCampeonatoPartida = id
+            });
+
+            return result;
         }
 
         public async Task<CampeonatoPartida> GetByUniqueKeyAsync(DateTime dtPartida, int idCampeonatoTime1, int idCampeonatoTime2)
@@ -39,6 +60,7 @@ select
   cp.IdEstadio,
   cp.IdCampeonatoTime1,
   cp.IdCampeonatoTime2,
+  cp.Peso,
   cp.PlacarTime1,
   cp.PlacarTime2
 from CampeonatoPartida cp
@@ -68,6 +90,7 @@ insert into CampeonatoPartida
   IdEstadio,
   IdCampeonatoTime1,
   IdCampeonatoTime2,
+  Peso,
   PlacarTime1,
   PlacarTime2
 )
@@ -77,6 +100,7 @@ values
   @IdEstadio,
   @IdCampeonatoTime1,
   @IdCampeonatoTime2,
+  @Peso,
   @PlacarTime1,
   @PlacarTime2
 )
@@ -88,6 +112,7 @@ values
                 IdEstadio = entity.IdEstadio,
                 IdCampeonatoTime1 = entity.IdCampeonatoTime1,
                 IdCampeonatoTime2 = entity.IdCampeonatoTime2,
+                Peso = entity.Peso,
                 PlacarTime1 = entity.PlacarTime1,
                 PlacarTime2 = entity.PlacarTime2
             });
@@ -95,9 +120,35 @@ values
             return result;
         }
 
-        public Task<int> UpdateAsync(CampeonatoPartida entity)
+        public async Task<int> UpdateAsync(CampeonatoPartida entity)
         {
-            throw new NotImplementedException();
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+update CampeonatoPartida set
+  DtPartida = @DtPartida,
+  IdEstadio = @IdEstadio,
+  IdCampeonatoTime1 = @IdCampeonatoTime1,
+  IdCampeonatoTime2 = @IdCampeonatoTime2,
+  Peso = @Peso,
+  PlacarTime1 = @PlacarTime1,
+  PlacarTime2 = @PlacarTime2
+where IdCampeonatoPartida = @IdCampeonatoPartida
+";
+
+            var result = await connection.ExecuteAsync(sql, new
+            {
+                IdCampeonatoPartida = entity.IdCampeonatoPartida,
+                DtPartida = entity.DtPartida,
+                IdEstadio = entity.IdEstadio,
+                IdCampeonatoTime1 = entity.IdCampeonatoTime1,
+                IdCampeonatoTime2 = entity.IdCampeonatoTime2,
+                Peso = entity.Peso,
+                PlacarTime1 = entity.PlacarTime1,
+                PlacarTime2 = entity.PlacarTime2
+            });
+
+            return result;
         }
     }
 }

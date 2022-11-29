@@ -49,6 +49,8 @@ insert into Regra (Descricao, DescricaoDetalhada, Pontuacao, Ordem, Status) valu
   ('Apenas o vencedor', 'Ex: você palpitou 3x1 e a partida acabou 4x0', 10, 6, 'S')
 insert into Regra (Descricao, DescricaoDetalhada, Pontuacao, Ordem, Status) values
   ('Empate garantido', 'Ex: você palpitou 1x1 e a partida acabou 2x1', 4, 7, 'S')
+insert into Regra (Descricao, DescricaoDetalhada, Pontuacao, Ordem, Status) values
+  ('Sem pontuação', 'Ex: você palpitou mas não acertou nada', 0, 8, 'S')
 
 
 select * from [BolaoRegra]

@@ -23,6 +23,35 @@ namespace Bolao.Infrastructure.Repositories.Boloes
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<BolaoPalpite>> GetAllByCampeonatoPartidaAsync(int idCampeonatoPartida)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  bp.IdBolaoPalpite,
+  bp.IdBolaoUsuario,
+  bp.IdCampeonatoPartida,
+  bp.PlacarTime1,
+  bp.PlacarTime2,
+  bp.DtCadastro,
+  bp.DtAlteracao,
+  bp.DtPontuacao,
+  bp.IdRegra,
+  bp.Pontuacao
+from BolaoPalpite bp
+where bp.IdCampeonatoPartida = @IdCampeonatoPartida
+order by bp.IdBolaoPalpite
+";
+
+            var result = await connection.QueryAsync<BolaoPalpite>(sql, new
+            {
+                IdCampeonatoPartida = idCampeonatoPartida
+            });
+
+            return result;
+        }
+
         public Task<BolaoPalpite> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
@@ -135,6 +164,29 @@ where IdBolaoPalpite = @IdBolaoPalpite
                 //DtPontuacao = DateTime.Now,  // entity.DtPontuacao
                 //IdRegra = entity.IdRegra,
                 //Pontuacao = entity.Pontuacao
+            });
+
+            return result;
+        }
+
+        public async Task<int> UpdatePontuacaoAsync(BolaoPalpite entity)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+update BolaoPalpite set
+  DtPontuacao = @DtPontuacao,
+  IdRegra = @IdRegra,
+  Pontuacao = @Pontuacao
+where IdBolaoPalpite = @IdBolaoPalpite
+";
+
+            var result = await connection.ExecuteAsync(sql, new
+            {
+                IdBolaoPalpite = entity.IdBolaoPalpite,
+                DtPontuacao = DateTime.Now,  // entity.DtPontuacao
+                IdRegra = entity.IdRegra,
+                Pontuacao = entity.Pontuacao
             });
 
             return result;

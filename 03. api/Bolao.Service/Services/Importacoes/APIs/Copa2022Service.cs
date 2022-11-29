@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bolao.Service.Interfaces.Services.Importacoes.APIs
+namespace Bolao.Service.Services.Importacoes.APIs
 {
     public class Copa2022Service
     {

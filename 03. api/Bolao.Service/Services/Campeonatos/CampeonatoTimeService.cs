@@ -1,4 +1,6 @@
-﻿using Bolao.Service.Interfaces.Services.Campeonatos;
+﻿using Bolao.Domain.Entities.Campeonatos;
+using Bolao.Service.Interfaces.Services.Campeonatos;
+using Core.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,24 @@ namespace Bolao.Service.Services.Campeonatos
 {
     public class CampeonatoTimeService : ICampeonatoTimeService
     {
+        public Task<IEnumerable<CampeonatoTime>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<CampeonatoTime> GetByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICommandResult> CreateAsync(ICommand command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICommandResult> UpdateAsync(ICommand command)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

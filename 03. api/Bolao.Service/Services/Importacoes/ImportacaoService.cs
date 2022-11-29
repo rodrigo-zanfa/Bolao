@@ -2,9 +2,9 @@
 using Bolao.Domain.Commands.Campeonatos;
 using Bolao.Domain.Entities.Campeonatos;
 using Bolao.Infrastructure.Interfaces.Repositories.Campeonatos;
-using Bolao.Service.Helpers;
+using Bolao.Service.Interfaces.Services.Campeonatos;
 using Bolao.Service.Interfaces.Services.Importacoes;
-using Bolao.Service.Interfaces.Services.Importacoes.APIs;
+using Bolao.Service.Services.Importacoes.APIs;
 using Core.Commands;
 using FluentValidation;
 using System;
@@ -20,19 +20,17 @@ namespace Bolao.Service.Services.Importacoes
         private readonly Copa2022Service _copa2022Service;
         private readonly ITimeRepository _timeRepository;
         private readonly ICampeonatoTimeRepository _campeonatoTimeRepository;
-        private readonly ICampeonatoPartidaRepository _campeonatoPartidaRepository;
+        private readonly ICampeonatoPartidaService _campeonatoPartidaService;
         private readonly IValidator<CreateTimeCommand> _createTimeCommandValidator;
-        private readonly IValidator<CreateCampeonatoPartidaCommand> _createCampeonatoPartidaCommandValidator;
         private readonly IMapper _mapper;
 
-        public ImportacaoService(ITimeRepository timeRepository, ICampeonatoTimeRepository campeonatoTimeRepository, ICampeonatoPartidaRepository campeonatoPartidaRepository, IValidator<CreateTimeCommand> createTimeCommandValidator, IValidator<CreateCampeonatoPartidaCommand> createCampeonatoPartidaCommandValidator, IMapper mapper)
+        public ImportacaoService(ITimeRepository timeRepository, ICampeonatoTimeRepository campeonatoTimeRepository, ICampeonatoPartidaService campeonatoPartidaService, IValidator<CreateTimeCommand> createTimeCommandValidator, IMapper mapper)
         {
             _copa2022Service = new Copa2022Service();
             _timeRepository = timeRepository;
             _campeonatoTimeRepository = campeonatoTimeRepository;
-            _campeonatoPartidaRepository = campeonatoPartidaRepository;
+            _campeonatoPartidaService = campeonatoPartidaService;
             _createTimeCommandValidator = createTimeCommandValidator;
-            _createCampeonatoPartidaCommandValidator = createCampeonatoPartidaCommandValidator;
             _mapper = mapper;
         }
 
@@ -114,31 +112,11 @@ namespace Bolao.Service.Services.Importacoes
                     DtPartida = dtPartida,
                     IdEstadio = idEstadio,
                     IdCampeonatoTime1 = campeonatoTime1.IdCampeonatoTime,
-                    IdCampeonatoTime2 = campeonatoTime2.IdCampeonatoTime
+                    IdCampeonatoTime2 = campeonatoTime2.IdCampeonatoTime,
+                    Peso = 10
                 };
 
-                // validação
-                var validation = await _createCampeonatoPartidaCommandValidator.ValidateAsync(createCommand);
-                if (!validation.IsValid)
-                {
-                    //var mensagensDeErro = ValidationErrorMessagesHelper.GetMessages(validation.Errors);
-                    //return new CommandResult(false, "Não foi possível criar a Partida do Campeonato.", new { Errors = mensagensDeErro });
-                    return false;
-                }
-
-                // validação de duplicidade
-                var entityExistente = await _campeonatoPartidaRepository.GetByUniqueKeyAsync(createCommand.DtPartida, createCommand.IdCampeonatoTime1, createCommand.IdCampeonatoTime2);
-                if (entityExistente is not null)
-                {
-                    //return new CommandResult(false, "Partida do Campeonato já cadastrada.", entityExistente);
-                    return false;
-                }
-
-                // criar a entidade
-                var entity = _mapper.Map<CampeonatoPartida>(createCommand);
-
-                // salvar
-                var result = await _campeonatoPartidaRepository.CreateAsync(entity);
+                var result = await _campeonatoPartidaService.CreateAsync(createCommand);
             }
 
             return true;

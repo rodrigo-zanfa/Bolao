@@ -80,6 +80,7 @@ CREATE TABLE [CampeonatoPartida] (
     [IdEstadio] int NOT NULL,
     [IdCampeonatoTime1] int NOT NULL,
     [IdCampeonatoTime2] int NOT NULL,
+    [Peso] int NOT NULL,
     [PlacarTime1] int NULL,
     [PlacarTime2] int NULL,
     CONSTRAINT [PK_CampeonatoPartida] PRIMARY KEY ([IdCampeonatoPartida]),
