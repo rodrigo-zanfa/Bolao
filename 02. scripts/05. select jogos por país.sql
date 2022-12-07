@@ -33,7 +33,7 @@ from [CampeonatoPartida] cp
   inner join [Time] t1 on ct1.IdTime = t1.IdTime
   inner join [Time] t2 on ct2.IdTime = t2.IdTime
   --inner join [BolaoUsuario] bu on
-  left join [BolaoPalpite] bp on bp.IdBolaoUsuario = 1 -- bu.IdBolaoUsuario = bp.IdBolaoUsuario 
+  left join [BolaoPalpite] bp on bp.IdBolaoUsuario = 1 -- bu.IdBolaoUsuario = bp.IdBolaoUsuario
                              and cp.IdCampeonatoPartida = bp.IdCampeonatoPartida
   left join [Regra] r on bp.IdRegra = r.IdRegra
 ) a
