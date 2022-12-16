@@ -30,5 +30,21 @@ namespace Bolao.API.Controllers.Importacoes
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("v1/[controller]/importar-palpites-copa-2022")]
+        public async Task<IActionResult> ImportarPalpitesCopa2022Async([FromServices] IImportacaoService service)
+        {
+            try
+            {
+                var result = (CommandResult)await service.ImportarPalpitesCopa2022Async();
+
+                return result.Success ? Ok(result) : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
