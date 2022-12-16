@@ -37,6 +37,27 @@ namespace Bolao.Service.Services.Usuarios
             throw new NotImplementedException();
         }
 
+        public async Task<Usuario> GetByNomeAsync(string nome)
+        {
+            var result = await _usuarioRepository.GetByNomeAsync(nome);
+
+            return result;
+        }
+
+        public async Task<Usuario> GetByEmailAsync(string email)
+        {
+            var result = await _usuarioRepository.GetByEmailAsync(email);
+
+            return result;
+        }
+
+        public async Task<Usuario> GetByNomeEmailAsync(string nome, string email)
+        {
+            var result = await _usuarioRepository.GetByNomeEmailAsync(nome, email);
+
+            return result;
+        }
+
         public async Task<ICommandResult> CreateAsync(ICommand command)
         {
             var createCommand = (CreateUsuarioCommand)command;

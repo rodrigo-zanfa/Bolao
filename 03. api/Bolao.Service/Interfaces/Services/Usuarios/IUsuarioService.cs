@@ -10,6 +10,8 @@ namespace Bolao.Service.Interfaces.Services.Usuarios
 {
     public interface IUsuarioService : IService<Usuario, int>
     {
-
+        Task<Usuario> GetByNomeAsync(string nome);
+        Task<Usuario> GetByEmailAsync(string email);
+        Task<Usuario> GetByNomeEmailAsync(string nome, string email);
     }
 }

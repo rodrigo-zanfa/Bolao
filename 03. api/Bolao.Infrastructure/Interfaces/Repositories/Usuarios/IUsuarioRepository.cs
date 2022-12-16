@@ -10,6 +10,8 @@ namespace Bolao.Infrastructure.Interfaces.Repositories.Usuarios
 {
     public interface IUsuarioRepository : IRepository<Usuario, int>
     {
+        Task<Usuario> GetByNomeAsync(string nome);
         Task<Usuario> GetByEmailAsync(string email);
+        Task<Usuario> GetByNomeEmailAsync(string nome, string email);
     }
 }

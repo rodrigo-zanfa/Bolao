@@ -28,6 +28,31 @@ namespace Bolao.Infrastructure.Repositories.Usuarios
             throw new NotImplementedException();
         }
 
+        public async Task<Usuario> GetByNomeAsync(string nome)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  u.IdUsuario,
+  u.Nome,
+  u.Email,
+  u.Senha,
+  u.UrlImagem,
+  u.DtCadastro
+from Usuario u
+where u.Nome = @Nome
+order by u.IdUsuario
+";
+
+            var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new
+            {
+                Nome = nome
+            });
+
+            return result;
+        }
+
         public async Task<Usuario> GetByEmailAsync(string email)
         {
             using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
@@ -47,6 +72,33 @@ order by u.IdUsuario
 
             var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new
             {
+                Email = email
+            });
+
+            return result;
+        }
+
+        public async Task<Usuario> GetByNomeEmailAsync(string nome, string email)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  u.IdUsuario,
+  u.Nome,
+  u.Email,
+  u.Senha,
+  u.UrlImagem,
+  u.DtCadastro
+from Usuario u
+where u.Nome = @Nome
+  and u.Email = @Email
+order by u.IdUsuario
+";
+
+            var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new
+            {
+                Nome = nome,
                 Email = email
             });
 
