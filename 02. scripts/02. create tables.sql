@@ -42,7 +42,7 @@ GO
 
 CREATE TABLE [Time] (
     [IdTime] int NOT NULL IDENTITY,
-    [IdTimeAux] int NOT NULL,
+    [IdAux] int NOT NULL,
     [Nome] varchar(100) NOT NULL,
     [Sigla] varchar(3) NOT NULL,
     [UrlImagem] varchar(255) NOT NULL,

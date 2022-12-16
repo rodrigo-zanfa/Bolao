@@ -9,7 +9,7 @@ namespace Bolao.Domain.Commands.Campeonatos
 {
     public class CreateTimeCommand : ICommand
     {
-        public int IdTimeAux { get; set; }
+        public int IdAux { get; set; }
         public string Nome { get; set; }
         public string Sigla { get; set; }
         public string UrlImagem { get; set; }

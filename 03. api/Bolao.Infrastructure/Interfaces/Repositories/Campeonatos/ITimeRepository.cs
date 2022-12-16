@@ -11,5 +11,6 @@ namespace Bolao.Infrastructure.Interfaces.Repositories.Campeonatos
     public interface ITimeRepository : IRepository<Time, int>
     {
         Task<Time> GetByIdAuxAsync(int idAux);
+        Task<Time> GetBySiglaAsync(string sigla);
     }
 }

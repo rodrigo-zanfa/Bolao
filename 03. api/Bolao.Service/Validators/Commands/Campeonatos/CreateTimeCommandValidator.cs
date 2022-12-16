@@ -13,8 +13,8 @@ namespace Bolao.Service.Validators.Commands.Campeonatos
     {
         public CreateTimeCommandValidator()
         {
-            RuleFor(c => c.IdTimeAux)
-                .GreaterThan(0).WithMessage(ValidatorMessageConstant.Time.IdTimeAuxInvalido);
+            RuleFor(c => c.IdAux)
+                .GreaterThan(0).WithMessage(ValidatorMessageConstant.Time.IdAuxInvalido);
 
             RuleFor(c => c.Nome)
                 .NotEmpty().WithMessage(ValidatorMessageConstant.Time.NomeInvalido)

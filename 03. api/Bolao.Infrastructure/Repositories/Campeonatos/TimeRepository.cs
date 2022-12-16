@@ -35,18 +35,42 @@ namespace Bolao.Infrastructure.Repositories.Campeonatos
             var sql = @"
 select
   t.IdTime,
-  t.IdTimeAux,
+  t.IdAux,
   t.Nome,
   t.Sigla,
   t.UrlImagem
 from Time t
-where t.IdTimeAux = @IdTimeAux
+where t.IdAux = @IdAux
 order by t.IdTime
 ";
 
             var result = await connection.QueryFirstOrDefaultAsync<Time>(sql, new
             {
-                IdTimeAux = idAux
+                IdAux = idAux
+            });
+
+            return result;
+        }
+
+        public async Task<Time> GetBySiglaAsync(string sigla)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  t.IdTime,
+  t.IdAux,
+  t.Nome,
+  t.Sigla,
+  t.UrlImagem
+from Time t
+where t.Sigla = @Sigla
+order by t.IdTime
+";
+
+            var result = await connection.QueryFirstOrDefaultAsync<Time>(sql, new
+            {
+                Sigla = sigla
             });
 
             return result;
@@ -59,14 +83,14 @@ order by t.IdTime
             var sql = @"
 insert into Time
 (
-  IdTimeAux,
+  IdAux,
   Nome,
   Sigla,
   UrlImagem
 )
 values
 (
-  @IdTimeAux,
+  @IdAux,
   @Nome,
   @Sigla,
   @UrlImagem
@@ -75,7 +99,7 @@ values
 
             var result = await connection.ExecuteAsync(sql, new
             {
-                IdTimeAux = entity.IdTimeAux,
+                IdAux = entity.IdAux,
                 Nome = entity.Nome,
                 Sigla = entity.Sigla,
                 UrlImagem = entity.UrlImagem
