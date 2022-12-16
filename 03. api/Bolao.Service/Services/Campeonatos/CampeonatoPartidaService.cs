@@ -21,14 +21,16 @@ namespace Bolao.Service.Services.Campeonatos
         private readonly IPontuacaoService _pontuacaoService;
         private readonly IValidator<CreateCampeonatoPartidaCommand> _createCampeonatoPartidaCommandValidator;
         private readonly IValidator<UpdatePlacarCampeonatoPartidaCommand> _updatePlacarCampeonatoPartidaCommandValidator;
+        private readonly IValidator<GerarPontuacaoPorPartidaCommand> _gerarPontuacaoPorPartidaCommandValidator;
         private readonly IMapper _mapper;
 
-        public CampeonatoPartidaService(ICampeonatoPartidaRepository campeonatoPartidaRepository, IPontuacaoService pontuacaoService, IValidator<CreateCampeonatoPartidaCommand> createCampeonatoPartidaCommandValidator, IValidator<UpdatePlacarCampeonatoPartidaCommand> updatePlacarCampeonatoPartidaCommandValidator, IMapper mapper)
+        public CampeonatoPartidaService(ICampeonatoPartidaRepository campeonatoPartidaRepository, IPontuacaoService pontuacaoService, IValidator<CreateCampeonatoPartidaCommand> createCampeonatoPartidaCommandValidator, IValidator<UpdatePlacarCampeonatoPartidaCommand> updatePlacarCampeonatoPartidaCommandValidator, IValidator<GerarPontuacaoPorPartidaCommand> gerarPontuacaoPorPartidaCommandValidator, IMapper mapper)
         {
             _campeonatoPartidaRepository = campeonatoPartidaRepository;
             _pontuacaoService = pontuacaoService;
             _createCampeonatoPartidaCommandValidator = createCampeonatoPartidaCommandValidator;
             _updatePlacarCampeonatoPartidaCommandValidator = updatePlacarCampeonatoPartidaCommandValidator;
+            _gerarPontuacaoPorPartidaCommandValidator = gerarPontuacaoPorPartidaCommandValidator;
             _mapper = mapper;
         }
 
@@ -40,6 +42,20 @@ namespace Bolao.Service.Services.Campeonatos
         public Task<CampeonatoPartida> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<CampeonatoPartida> GetByUniqueKeyAsync(DateTime dtPartida, int idCampeonatoTime1, int idCampeonatoTime2)
+        {
+            var result = await _campeonatoPartidaRepository.GetByUniqueKeyAsync(dtPartida, idCampeonatoTime1, idCampeonatoTime2);
+
+            return result;
+        }
+
+        public async Task<CampeonatoPartida> GetByUniqueKeyAsync(int idCampeonatoTime1, int idCampeonatoTime2)
+        {
+            var result = await _campeonatoPartidaRepository.GetByUniqueKeyAsync(idCampeonatoTime1, idCampeonatoTime2);
+
+            return result;
         }
 
         public async Task<ICommandResult> CreateAsync(ICommand command)
@@ -105,6 +121,30 @@ namespace Bolao.Service.Services.Campeonatos
 
             // retornar o resultado
             return new CommandResult(true, "Placar da Partida do Campeonato atualizado com sucesso.", command);
+        }
+
+        public async Task<ICommandResult> GerarPontuacaoPorPartidaAsync(GerarPontuacaoPorPartidaCommand command)
+        {
+            // validação
+            var validation = await _gerarPontuacaoPorPartidaCommandValidator.ValidateAsync(command);
+            if (!validation.IsValid)
+            {
+                var mensagensDeErro = ValidationErrorMessagesHelper.GetMessages(validation.Errors);
+                return new CommandResult(false, "Não foi possível gerar as Pontuações da Partida do Campeonato.", new { Errors = mensagensDeErro });
+            }
+
+            // validação de chave existente
+            var entityExistente = await _campeonatoPartidaRepository.GetByIdAsync(command.IdCampeonatoPartida);
+            if (entityExistente is null)
+            {
+                return new CommandResult(false, "Partida do Campeonato não encontrada para geração das Pontuações.", entityExistente);
+            }
+
+            // atualizar as pontuações de todos os bolões
+            await _pontuacaoService.GerarPontuacaoPorPartidaAsync(command.IdCampeonatoPartida);
+
+            // retornar o resultado
+            return new CommandResult(true, "Pontuações da Partida do Campeonato geradas com sucesso.", command);
         }
     }
 }

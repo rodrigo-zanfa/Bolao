@@ -79,6 +79,34 @@ where cp.DtPartida = @DtPartida
             return result;
         }
 
+        public async Task<CampeonatoPartida> GetByUniqueKeyAsync(int idCampeonatoTime1, int idCampeonatoTime2)
+        {
+            using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);
+
+            var sql = @"
+select
+  cp.IdCampeonatoPartida,
+  cp.DtPartida,
+  cp.IdEstadio,
+  cp.IdCampeonatoTime1,
+  cp.IdCampeonatoTime2,
+  cp.Peso,
+  cp.PlacarTime1,
+  cp.PlacarTime2
+from CampeonatoPartida cp
+where cp.IdCampeonatoTime1 = @IdCampeonatoTime1
+  and cp.IdCampeonatoTime2 = @IdCampeonatoTime2
+";
+
+            var result = await connection.QueryFirstOrDefaultAsync<CampeonatoPartida>(sql, new
+            {
+                IdCampeonatoTime1 = idCampeonatoTime1,
+                IdCampeonatoTime2 = idCampeonatoTime2
+            });
+
+            return result;
+        }
+
         public async Task<int> CreateAsync(CampeonatoPartida entity)
         {
             using var connection = BolaoConnection.GetConnection(_apiSettingsAccessor.GetSettings().Database);

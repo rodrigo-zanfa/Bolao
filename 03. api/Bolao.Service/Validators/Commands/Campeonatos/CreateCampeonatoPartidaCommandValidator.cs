@@ -13,8 +13,8 @@ namespace Bolao.Service.Validators.Commands.Campeonatos
     {
         public CreateCampeonatoPartidaCommandValidator()
         {
-            RuleFor(c => c.DtPartida)
-                .GreaterThanOrEqualTo(DateTime.Now).WithMessage(ValidatorMessageConstant.CampeonatoPartida.DtPartidaInvalida);
+            //RuleFor(c => c.DtPartida)
+            //    .GreaterThanOrEqualTo(DateTime.Now).WithMessage(ValidatorMessageConstant.CampeonatoPartida.DtPartidaInvalida);
 
             RuleFor(c => c.IdEstadio)
                 .GreaterThan(0).WithMessage(ValidatorMessageConstant.CampeonatoPartida.IdEstadioInvalido);

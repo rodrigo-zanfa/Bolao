@@ -24,6 +24,22 @@ namespace Bolao.API.Controllers.Campeonatos
             {
                 var result = (CommandResult)await service.UpdatePlacarAsync(command);
 
+                return result.Success ? Ok(result) : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("v1/[controller]")]
+        public async Task<IActionResult> GerarPontuacaoPorPartidaAsync([FromServices] ICampeonatoPartidaService service, [FromBody] GerarPontuacaoPorPartidaCommand command)
+        {
+            try
+            {
+                var result = (CommandResult)await service.GerarPontuacaoPorPartidaAsync(command);
+
                 return result.Success ? Created($"/", result) : BadRequest(result);
             }
             catch (Exception ex)
