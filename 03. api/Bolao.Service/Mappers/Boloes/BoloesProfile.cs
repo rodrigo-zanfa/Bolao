@@ -13,7 +13,15 @@ namespace Bolao.Service.Mappers.Boloes
         public static MappingProfile AddMappersBoloes(this MappingProfile mapper)
         {
             return mapper
+                .AddMapperBolaoUsuario()
                 .AddMapperBolaoPalpite();
+        }
+
+        private static MappingProfile AddMapperBolaoUsuario(this MappingProfile mapper)
+        {
+            mapper.CreateMap<CreateBolaoUsuarioCommand, BolaoUsuario>();
+
+            return mapper;
         }
 
         private static MappingProfile AddMapperBolaoPalpite(this MappingProfile mapper)

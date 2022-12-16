@@ -157,7 +157,7 @@
 
         public static class Time
         {
-            public const string IdTimeAuxInvalido = "Id Auxiliar deve ser preenchido.";
+            public const string IdAuxInvalido = "Id Auxiliar deve ser preenchido.";
             public const string NomeInvalido = "Nome do Time deve ser preenchido.";
             public const string SiglaInvalida = "Sigla do Time deve ser preenchida.";
             public const string UrlImagemInvalida = "URL da imagem do Time deve ser preenchida.";
@@ -191,6 +191,12 @@
             public const string IdCampeonatoPartidaInvalido = "Id do Campeonato Partida deve ser preenchido.";
             public const string PlacarTime1Invalido = "Placar do Time 1 deve ser preenchido.";
             public const string PlacarTime2Invalido = "Placar do Time 2 deve ser preenchido.";
+        }
+
+        public static class BolaoUsuario
+        {
+            public const string IdBolaoInvalido = "Id do Bolão deve ser preenchido.";
+            public const string IdUsuarioInvalido = "Id do Usuário deve ser preenchido.";
         }
     }
 }

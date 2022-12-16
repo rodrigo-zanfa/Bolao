@@ -218,7 +218,8 @@ namespace Bolao.API.Configuration
                 .AddTransient<ICampeonatoPartidaRepository, CampeonatoPartidaRepository>()
                 .AddTransient<ICampeonatoPartidaService, CampeonatoPartidaService>()
                 .AddTransient<IValidator<CreateCampeonatoPartidaCommand>, CreateCampeonatoPartidaCommandValidator>()
-                .AddTransient<IValidator<UpdatePlacarCampeonatoPartidaCommand>, UpdatePlacarCampeonatoPartidaCommandValidator>();
+                .AddTransient<IValidator<UpdatePlacarCampeonatoPartidaCommand>, UpdatePlacarCampeonatoPartidaCommandValidator>()
+                .AddTransient<IValidator<GerarPontuacaoPorPartidaCommand>, GerarPontuacaoPorPartidaCommandValidator>();
 
             return services;
         }
@@ -235,6 +236,11 @@ namespace Bolao.API.Configuration
 
         private static IServiceCollection AddBoloesInjection(this IServiceCollection services)
         {
+            services
+                .AddTransient<IBolaoUsuarioRepository, BolaoUsuarioRepository>()
+                .AddTransient<IBolaoUsuarioService, BolaoUsuarioService>()
+                .AddTransient<IValidator<CreateBolaoUsuarioCommand>, CreateBolaoUsuarioCommandValidator>();
+
             services
                 .AddTransient<IBolaoPalpiteRepository, BolaoPalpiteRepository>()
                 .AddTransient<IBolaoPalpiteService, BolaoPalpiteService>()
