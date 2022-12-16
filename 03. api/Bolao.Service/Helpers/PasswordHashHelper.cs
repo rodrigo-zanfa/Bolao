@@ -10,19 +10,18 @@ namespace Bolao.Service.Helpers
     // Fonte: https://medium.com/dealeron-dev/storing-passwords-in-net-core-3de29a3da4d2
     public static class PasswordHashHelper
     {
-        private const int SaltSize = 16;  // 128 bit 
+        private const int SaltSize = 16;  // 128 bit
         private const int Iterations = 10000;
         private const int KeySize = 32;  // 256 bit
 
         public static string Hash(string password)
         {
-            using (var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Iterations, HashAlgorithmName.SHA512))
-            {
-                var saltSize = Convert.ToBase64String(algorithm.Salt);
-                var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
+            using var algorithm = new Rfc2898DeriveBytes(password, SaltSize, Iterations, HashAlgorithmName.SHA512);
 
-                return $"{Iterations}.{saltSize}.{key}";
-            }
+            var saltSize = Convert.ToBase64String(algorithm.Salt);
+            var key = Convert.ToBase64String(algorithm.GetBytes(KeySize));
+
+            return $"{Iterations}.{saltSize}.{key}";
         }
 
         public static (bool Verified, bool NeedsUpgrade) Check(string hash, string password)
@@ -40,14 +39,13 @@ namespace Bolao.Service.Helpers
 
             var needsUpgrade = iterations != Iterations;
 
-            using (var algorithm = new Rfc2898DeriveBytes(password, saltSize, iterations, HashAlgorithmName.SHA512))
-            {
-                var keyToCheck = algorithm.GetBytes(KeySize);
+            using var algorithm = new Rfc2898DeriveBytes(password, saltSize, iterations, HashAlgorithmName.SHA512);
 
-                var verified = keyToCheck.SequenceEqual(key);
+            var keyToCheck = algorithm.GetBytes(KeySize);
 
-                return (verified, needsUpgrade);
-            }
+            var verified = keyToCheck.SequenceEqual(key);
+
+            return (verified, needsUpgrade);
         }
     }
 }
