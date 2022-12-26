@@ -1,7 +1,11 @@
 
 -- Pontos totais
-select bp.IdBolaoUsuario, sum(bp.Pontuacao) from [BolaoPalpite] bp
-group by bp.IdBolaoUsuario
+select bp.IdBolaoUsuario, u.Nome, sum(bp.Pontuacao) TotalPontos
+from [BolaoPalpite] bp
+  inner join [BolaoUsuario] bu on bp.IdBolaoUsuario = bu.IdBolaoUsuario
+                              and bu.IdBolao = 1
+  inner join [Usuario] u on bu.IdUsuario = u.IdUsuario
+group by bp.IdBolaoUsuario, u.Nome
 order by bp.IdBolaoUsuario
 
 
@@ -12,7 +16,7 @@ select
   r.Pontuacao,
   TotalPalpites.TotalPalpites,
   count(*) TotalNaRegra,
-  cast((cast(count(*) as float) / cast(TotalPalpites.TotalPalpites as float) * 100) as numeric(4,2)) PercentSobreTotal
+  cast((cast(count(*) as float) / cast(TotalPalpites.TotalPalpites as float) * 100) as numeric(5,2)) PercentSobreTotal
 from [BolaoPalpite] bp
 inner join [Regra] r on bp.IdRegra = r.IdRegra
   cross join (
@@ -31,30 +35,33 @@ order by bp.IdRegra
 
 -- Total de pontos por dia
 select
-  cast(cp.DtPartida as date) DtPartida,
+  PontuacaoDia.DtPartida,
   count(cp.IdCampeonatoPartida) TotalJogosDia,
   PontuacaoDia.MaxPontuacaoDia,
   sum(bp.Pontuacao) TotalPontuacaoDia,
-  cast((cast(sum(bp.Pontuacao) as float) / cast(PontuacaoDia.MaxPontuacaoDia as float) * 100) as numeric(4,2)) PercentAproveitamentoDia
-from [CampeonatoPartida] cp
-  left join (
-             select cast(cp1.DtPartida as date) DtPartida, sum(cp1.Peso * r1.Pontuacao) MaxPontuacaoDia
-             from [CampeonatoPartida] cp1
-               cross join [Regra] r1
-             where r1.IdRegra = 1
-             group by cast(cp1.DtPartida as date)
-            ) PontuacaoDia on cast(cp.DtPartida as date) = PontuacaoDia.DtPartida
+  cast((cast(sum(bp.Pontuacao) as float) / cast(PontuacaoDia.MaxPontuacaoDia as float) * 100) as numeric(5,2)) PercentAproveitamentoDia
+from (
+      select cast(cp1.DtPartida as date) DtPartida, sum(cp1.Peso * r1.Pontuacao) MaxPontuacaoDia
+      from [CampeonatoPartida] cp1
+        cross join [Regra] r1
+      where r1.IdRegra = 1
+      group by cast(cp1.DtPartida as date)
+     ) PontuacaoDia
+  inner join [CampeonatoPartida] cp on PontuacaoDia.DtPartida = cast(cp.DtPartida as date)
   left join [BolaoPalpite] bp on bp.IdBolaoUsuario = 1 -- bu.IdBolaoUsuario = bp.IdBolaoUsuario
                              and cp.IdCampeonatoPartida = bp.IdCampeonatoPartida
-group by cast(cp.DtPartida as date), PontuacaoDia.MaxPontuacaoDia
-order by cast(cp.DtPartida as date)
+group by PontuacaoDia.DtPartida, PontuacaoDia.MaxPontuacaoDia
+order by PontuacaoDia.DtPartida
 
 
 -- Total de palpites por usuário
-select IdBolaoUsuario, count(*) TotalPalpites
-from [BolaoPalpite]
-group by IdBolaoUsuario
-order by count(*) desc, IdBolaoUsuario
+select bp.IdBolaoUsuario, u.Nome, count(*) TotalPalpites
+from [BolaoPalpite] bp
+  inner join [BolaoUsuario] bu on bp.IdBolaoUsuario = bu.IdBolaoUsuario
+                              and bu.IdBolao = 1
+  inner join [Usuario] u on bu.IdUsuario = u.IdUsuario
+group by bp.IdBolaoUsuario, u.Nome
+order by count(*) desc, bp.IdBolaoUsuario
 
 
 -- Total de palpites por jogo
