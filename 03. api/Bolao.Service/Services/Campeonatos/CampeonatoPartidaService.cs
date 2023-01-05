@@ -109,7 +109,7 @@ namespace Bolao.Service.Services.Campeonatos
                 return new CommandResult(false, "Partida do Campeonato não encontrada para atualização.", entityExistente);
             }
 
-            // alterar os atributos
+            // alterar os atributos necessários
             entityExistente.PlacarTime1 = command.PlacarTime1;
             entityExistente.PlacarTime2 = command.PlacarTime2;
 

@@ -117,7 +117,7 @@ namespace Bolao.Service.Services.Produtos
                 return new CommandResult(false, "Produto não encontrado para alteração de Status.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.Ativo = ativo;
             entityExistente.UsuarioAlteracao = usuarioAlteracao;
 

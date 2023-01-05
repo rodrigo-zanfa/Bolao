@@ -136,7 +136,7 @@ namespace Bolao.Service.Services.Pontuacoes
 
         public async Task/*<ICommandResult>*/ SaveAsync(BolaoPalpite palpite, Regra regra, CampeonatoPartida partida)
         {
-            // alterar os atributos
+            // alterar os atributos necessários
             palpite.IdRegra = regra.IdRegra;
             palpite.Pontuacao = regra.Pontuacao * partida.Peso;
 

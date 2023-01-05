@@ -69,7 +69,7 @@ namespace Bolao.Service.Services.Boloes
             }
             else  // se existir, atualizar
             {
-                // alterar os atributos
+                // alterar os atributos necessários
                 entityExistente.PlacarTime1 = command.PlacarTime1;
                 entityExistente.PlacarTime2 = command.PlacarTime2;
 

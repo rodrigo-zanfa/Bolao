@@ -262,7 +262,7 @@ namespace Bolao.Service.Services.Propostas
             }
             else
             {
-                // alterar os dados necessários
+                // alterar os atributos necessários
                 entityExistente.Quantidade += command.QtdDesejada;
                 entityExistente.QtdDesejada += command.QtdDesejada;
 
@@ -309,7 +309,7 @@ namespace Bolao.Service.Services.Propostas
                 return new CommandResult(false, "Item da Proposta não encontrado para atualização.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.Quantidade = command.QtdDesejada;
             entityExistente.QtdDesejada = command.QtdDesejada;
 
@@ -393,7 +393,7 @@ namespace Bolao.Service.Services.Propostas
                 return new CommandResult(false, "Proposta não encontrada para atualização.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.TipoFrete = command.TipoFrete;
 
             // salvar
@@ -436,7 +436,7 @@ namespace Bolao.Service.Services.Propostas
                 return new CommandResult(false, "Proposta não encontrada para atualização.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.HabilitaSeguro = command.HabilitaSeguro ? "S" : "N";
 
             // salvar
@@ -479,7 +479,7 @@ namespace Bolao.Service.Services.Propostas
                 return new CommandResult(false, "Proposta não encontrada para atualização.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.IdCondicaoPagto = command.IdCondicaoPagto;
 
             // salvar
@@ -508,7 +508,7 @@ namespace Bolao.Service.Services.Propostas
                 }
                 else
                 {
-                    // alterar os dados necessários
+                    // alterar os atributos necessários
                     entityExistenteCartao.IdOperadora = command.IdOperadora;
                     entityExistenteCartao.QuantidadeParcelas = command.QuantidadeParcelas;
 
@@ -556,7 +556,7 @@ namespace Bolao.Service.Services.Propostas
                 return new CommandResult(false, "Proposta não encontrada para atualização.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.PorcProjeto = command.ValorProjeto;
             entityExistente.PorcInstalacao = command.ValorInstalacao;
 
@@ -584,7 +584,7 @@ namespace Bolao.Service.Services.Propostas
             }
             else
             {
-                // alterar os dados necessários
+                // alterar os atributos necessários
                 entityExistenteServico.ValorProjeto = command.ValorProjeto;
                 entityExistenteServico.ValorInstalacao = command.ValorInstalacao;
 

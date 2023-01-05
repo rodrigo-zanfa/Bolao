@@ -110,7 +110,7 @@ namespace Bolao.Service.Services.ClassesParceiros
                 return new CommandResult(false, "Classe do Parceiro Distribuidor não encontrada para alteração de Classe.", entityExistente);
             }
 
-            // alterar os dados necessários
+            // alterar os atributos necessários
             entityExistente.IdClasseParceiro = idClasseParceiro;
 
             // salvar
