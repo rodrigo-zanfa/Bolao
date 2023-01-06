@@ -13,7 +13,7 @@
             public const string ModeloObrigatorio = "Ao informar a Marca, o Modelo também deve ser informado.";
             public const string ModeloInvalido = "Modelo do Produto deve ser preenchido.";
             public const string UnidadeInvalida = "Unidade do Produto deve ser preenchida.";
-            public const string ValorInvalido = "Valor do Produto deve ser maior do que 0,00.";
+            public const string ValorInvalido = "Valor do Produto deve ser maior que 0,00.";
             public const string EstruturaInvalida = "Estrutura do Produto deve ser preenchida.";
             public const string InversorInvalido = "Inversor do Produto deve ser preenchido.";
             public const string ModuloInvalido = "Módulo do Produto deve ser preenchido.";
@@ -28,7 +28,7 @@
         public static class Inversor
         {
             public const string IdInvalido = "Id do Inversor deve ser preenchido.";
-            public const string PotenciaSaidaInvalida = "POut (Potência de Saída) do Inversor deve ser maior do que 0,00.";
+            public const string PotenciaSaidaInvalida = "POut (Potência de Saída) do Inversor deve ser maior que 0,00.";
         }
 
         public static class Cabo
@@ -41,7 +41,7 @@
         {
             public const string IdInvalido = "Id do Módulo deve ser preenchido.";
             public const string DescricaoGridInvalida = "Descrição (Grid) do Módulo deve ser preenchida.";
-            public const string PotenciaInvalida = "Potência do Módulo (kWp) deve ser maior do que 0,00.";
+            public const string PotenciaInvalida = "Potência do Módulo (kWp) deve ser maior que 0,00.";
         }
 
         public static class ItemKit
@@ -95,7 +95,7 @@
         {
             public const string IdAuxInvalido = "Id do item da Proposta deve ser preenchido.";
             public const string CodProdutoInvalido = "Código do Produto do item da Proposta deve ser preenchido.";
-            public const string QtdDesejadaInvalida = "Quantidade do item da Proposta deve ser maior do que 0.";
+            public const string QtdDesejadaInvalida = "Quantidade do item da Proposta deve ser maior que 0.";
         }
 
         public static class AuxPropostaServico
@@ -107,7 +107,7 @@
         public static class AuxPropostaCartao
         {
             public const string IdOperadoraInvalido = "Id da Operadora do Cartão deve ser preenchido.";
-            public const string QuantidadeParcelasInvalida = "Quantidade de Parcelas do Cartão deve ser maior do que 0.";
+            public const string QuantidadeParcelasInvalida = "Quantidade de Parcelas do Cartão deve ser maior que 0.";
         }
 
         public static class ClasseParceiro
@@ -128,7 +128,7 @@
         public static class Configuracao
         {
             public const string IdConfiguracaoInvalido = "Id deve ser preenchido.";
-            public const string QuantidadeDiasVencimentoPropostaInvalida = "Quantidade de Dias para vencimento das Propostas deve ser maior do que 0.";
+            public const string QuantidadeDiasVencimentoPropostaInvalida = "Quantidade de Dias para vencimento das Propostas deve ser maior que 0.";
             public const string PorcentagemFreteInvalida = "Porcentagem de Frete deve ser maior ou igual à 0,00.";
             public const string PorcentagemImpostoInvalida = "Porcentagem de Imposto deve ser maior ou igual à 0,00.";
             public const string PorcentagemInadimplenciaInvalida = "Porcentagem de Inadimplência deve ser maior ou igual à 0,00.";
